@@ -1,25 +1,25 @@
-package org.openPyro.charts
+package org.openPyro.plugins.listCharts
 {
 	import org.openPyro.controls.List;
 	
 	import flash.display.DisplayObject;
 	
-	public class VBarChart extends List
+	public class HBarChart extends List
 	{
 		
-	public function VBarChart(){
+	public function HBarChart(){
 			super();
 			
 			//this.layout = new VLayout();
 		}
 		
-		private var _xField:String = "value";
-		public function set xField(fieldName:String):void
+		private var _yField:String = "value";
+		public function set yField(fieldName:String):void
 		{
-			_xField = fieldName;
+			_yField = fieldName;
 		}
 		
-		private var maxXValue:Number = 0;
+		private var maxYValue:Number = 0;
 		override public function set dataProvider(dpObject:Object):void
 		{	
 			
@@ -29,14 +29,13 @@ package org.openPyro.charts
 				var object:Object = dp[i];
 				try
 				{
-					var xfValue:Number = Number(object[_xField])
-					if(xfValue > maxXValue){
-						maxXValue = xfValue;
+					var yfValue:Number = Number(object[_yField])
+					if(yfValue > maxYValue){
+						maxYValue = yfValue;
 					}
 				}
 				catch(e:Error)
 				{
-					trace("Could not find xValue value")
 					continue;	
 				}
 			}
@@ -46,9 +45,9 @@ package org.openPyro.charts
 		override protected function setRendererData(renderer:DisplayObject, data:Object, index:int):void
 		{
 			super.setRendererData(renderer, data, index);
-			if(renderer is IHorizontalChartItemRenderer)
+			if(renderer is IVerticalChartItemRenderer)
 			{
-				IHorizontalChartItemRenderer(renderer).maxXValue = this.maxXValue;
+				IVerticalChartItemRenderer(renderer).maxYValue = this.maxYValue;
 			}
 		}
 

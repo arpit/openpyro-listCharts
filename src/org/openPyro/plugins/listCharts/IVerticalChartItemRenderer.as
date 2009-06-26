@@ -1,4 +1,4 @@
-package org.openPyro.charts
+package org.openPyro.plugins.listCharts
 {
 	public interface IVerticalChartItemRenderer
 	{
